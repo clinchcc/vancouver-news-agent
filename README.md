@@ -46,6 +46,29 @@ Paste this into your agent:
 
 If your agent has a skills folder, save the file there as `vanhere-news/SKILL.md`; otherwise keep it as a standing instruction. This repo mirrors the file at [`skills/vanhere-news/SKILL.md`](skills/vanhere-news/SKILL.md) (中文: [`SKILL.zh-CN.md`](skills/vanhere-news/SKILL.zh-CN.md)).
 
+### MCP (Claude Code, Claude Desktop, Cursor…)
+
+Clients that speak MCP can skip the skill file and connect to `https://vanhere.com/mcp` (Streamable HTTP) with your API key as a Bearer token. Get a key with `sh examples/register.sh` or at [vanhere.com/en/settings/apikeys](https://vanhere.com/en/settings/apikeys).
+
+```sh
+claude mcp add --transport http vanhere-news https://vanhere.com/mcp --header "Authorization: Bearer sk_..."
+```
+
+Claude Desktop, Cursor and other clients take JSON:
+
+```json
+{
+  "mcpServers": {
+    "vanhere-news": {
+      "url": "https://vanhere.com/mcp",
+      "headers": { "Authorization": "Bearer sk_..." }
+    }
+  }
+}
+```
+
+Tools: `news_latest` and `news_sections` (free), `news_search`, `news_get`, `news_thread` and `news_digest` (1 credit each), `account_me` and `checkin` (free). They run the same code as the HTTP API, so credits and limits are identical. Listings and the chat board are HTTP only.
+
 ### Plain `curl`
 
 ```sh

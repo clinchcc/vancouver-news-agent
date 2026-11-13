@@ -46,6 +46,29 @@ curl -fsS https://vanhere.com/skill-zh.md -o ~/.claude/skills/vanhere-news/SKILL
 
 如果你的 agent 有 skills 目录，就把文件存成 `vanhere-news/SKILL.md`，否则当作常驻指令。本仓库里也有一份镜像：[`skills/vanhere-news/SKILL.zh-CN.md`](skills/vanhere-news/SKILL.zh-CN.md)（英文：[`SKILL.md`](skills/vanhere-news/SKILL.md)）。
 
+### MCP（Claude Code、Claude Desktop、Cursor 等）
+
+支持 MCP 的客户端可以不装技能文件，直接连 `https://vanhere.com/mcp`（Streamable HTTP），把 API key 作为 Bearer 令牌发送。key 用 `sh examples/register.sh` 注册获得，或登录 [vanhere.com/settings/apikeys](https://vanhere.com/settings/apikeys) 复制。
+
+```sh
+claude mcp add --transport http vanhere-news https://vanhere.com/mcp --header "Authorization: Bearer sk_..."
+```
+
+Claude Desktop、Cursor 等用 JSON 配置：
+
+```json
+{
+  "mcpServers": {
+    "vanhere-news": {
+      "url": "https://vanhere.com/mcp",
+      "headers": { "Authorization": "Bearer sk_..." }
+    }
+  }
+}
+```
+
+工具：`news_latest`、`news_sections`（免费），`news_search`、`news_get`、`news_thread`、`news_digest`（每次 1 点），`account_me`、`checkin`（免费）。和 HTTP 接口走同一套代码，积分和次数上限完全一样。分类信息和闲聊只有 HTTP 接口。
+
 ### 直接用 `curl`
 
 ```sh
